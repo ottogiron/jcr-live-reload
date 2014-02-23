@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+
+
+<script type="text/javascript">
+    
+    $(function(){
+        connect();
+    });
+    var wsUri = "ws://localhost:9001/liveReload";
+    var websocket;
+    function connect(){
+        websocket = new WebSocket(wsUri);
+        websocket.onopen = function(event){
+            console.log("Connection open");            
+        };
+        
+        websocket.onclose = function(event){
+            console.log("Connection closed");
+        };
+        
+        websocket.onerror = function(event ){
+            console.log("Connection error");
+            console.log(event);
+        };
+        
+        websocket.onmessage = function(event){
+            console.log("..........Response recieved:"+event.data); 
+            //location.reload();
+        };
+    }
+    
+    function closeConnection(){
+        console.log("Closing connection");
+        websocket.close();
+    }
+    
+    function sendMessage(){
+        var message = document.getElementById('messageText').value;
+        console.log("About to send message..............."+message);
+        websocket.send(message);
+    }
+    
+   
+</script>
+</head>
+<body>
+    <input type="button" value="Open connection" onclick="connect()"/>
+    <input type="button" value="Close connection" onclick="closeConnection()"/>
+    Message: <input type="text" id="messageText" /><input type="button" value="send message" onclick="sendMessage()"/>
+
+</body>
+</html>
