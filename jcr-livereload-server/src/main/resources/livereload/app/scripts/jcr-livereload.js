@@ -3,6 +3,7 @@
     var JCRLiveReload = JCRLiveReload || {};
     window.JCRLiveReload = JCRLiveReload;
     var socket;
+    
         
     JCRLiveReload.initialize = function(port){ 
        socket = new WebSocket('ws://localhost:'+port+'/liveReload'); 
