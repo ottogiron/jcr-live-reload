@@ -100,7 +100,7 @@ public class LiveReloadServer extends WebSocketApplication implements LiveReload
 
     @Override
     public void onEvent(LiveReloadEvent event) {
-        logger.info("An event has been  notified!!!!");
+       // logger.info("An event has been  notified!!!!");
         Set<WebSocket> sockets = getWebSockets();
         int socketsSize = sockets.size();
         for(WebSocket socket:sockets){
