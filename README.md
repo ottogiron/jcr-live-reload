@@ -7,7 +7,8 @@ JCRLiveReload.js connects to a JCR LiveReload server via web sockets and listens
 ## How to use it
 You have to install the server in your Apache Felix instance then include a reference to the jcr-livereload.js script.
 
-* Clone the repository 
+* Clone the repository
+* create the folder /apps/livereload/install 
 * Execute _**mvn clean install -P auto-deploy**_. That will install JCR Live Reload Server on apache felix via sling maven plugin.
 * go to [http://localhost:9001/index.html](http://localhost:9001/index.html)
 * Copy the code and paste it in a page (template, component) you wish to be reloaded when a resource change.

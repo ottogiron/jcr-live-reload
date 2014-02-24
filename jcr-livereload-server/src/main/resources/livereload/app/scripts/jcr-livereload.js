@@ -1,4 +1,4 @@
-(function(window,jQuery){
+(function(window){
     
     var JCRLiveReload = JCRLiveReload || {};
     window.JCRLiveReload = JCRLiveReload;
@@ -31,4 +31,4 @@
     
     
         
-})(window,$);
+})(window);
