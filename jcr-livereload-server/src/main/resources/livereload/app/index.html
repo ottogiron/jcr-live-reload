@@ -40,7 +40,7 @@
                  </div>
                  <div class="panel" style="fon"> <small>&lt;script src=&quot;http://<span class="hostLabel">localhost</span>:<span class="portLabel">9001</span>/scripts/jcr-livereload.js&quot;&gt;&lt;/script&gt;
                      <br/>&lt;script&gt;
-                        JCRLiveReload.initialize();
+                        JCRLiveReload.initialize(<span class="portLabel"></span>);
                         &lt;/script&gt;</small></div>
             </div>
         </div>
@@ -55,7 +55,7 @@
             <script src="scripts/jcr-livereload.js"></script>        
         <!-- endbuild -->
         <script>
-            JCRLiveReload.initialize();
+            JCRLiveReload.initialize(document.location.port);
         </script>
          <script>
             $('.portLabel').html(document.location.port);

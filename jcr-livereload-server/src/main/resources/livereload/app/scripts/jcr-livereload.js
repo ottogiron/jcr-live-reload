@@ -5,8 +5,8 @@
     var socket;
     
         
-    JCRLiveReload.initialize = function(){ 
-       socket = new WebSocket('ws://'+document.location.hostname+':'+document.location.port+'/liveReload'); 
+    JCRLiveReload.initialize = function(port){ 
+       socket = new WebSocket('ws://'+document.location.hostname+':'+port+'/liveReload'); 
          socket.onopen = onConnect;         
         socket.onclose = onClose;        
         socket.onerror = onConnectError;
