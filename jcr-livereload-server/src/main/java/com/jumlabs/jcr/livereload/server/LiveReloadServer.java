@@ -69,9 +69,8 @@ public class LiveReloadServer extends WebSocketApplication implements LiveReload
         server = new HttpServer();
         NetworkListener nlistener = new NetworkListener("grizzly", "0.0.0.0", port);
         server.addListener(nlistener);
-
-        server.getServerConfiguration().addHttpHandler(
-                new CLStaticHttpHandler(LiveReloadServer.class.getClassLoader()), "/");
+        CLStaticHttpHandler  clStaticHandler = new CLStaticHttpHandler(LiveReloadServer.class.getClassLoader(),"livereload/dist/");
+        server.getServerConfiguration().addHttpHandler( clStaticHandler);
         final WebSocketAddOn addon = new WebSocketAddOn();
         for (NetworkListener listener : server.getListeners()) {
             listener.registerAddOn(addon);
@@ -114,11 +113,11 @@ public class LiveReloadServer extends WebSocketApplication implements LiveReload
 
     @Deactivate
     protected void deactivate(ComponentContext ctx) {
-        logger.info("Stoping  Live reload server");
-        server.shutdown();
-        logger.info("Live reload server se");
         logger.info("Unregistering web socket server");
         WebSocketEngine.getEngine().unregister(this);
+        logger.info("Stoping  Live reload server");
+        server.shutdown();
+        logger.info("Live reload server");        
         liveReloadEventService.unregisterHandler(this);
         logger.info("Web socket server unregistered");
     }
