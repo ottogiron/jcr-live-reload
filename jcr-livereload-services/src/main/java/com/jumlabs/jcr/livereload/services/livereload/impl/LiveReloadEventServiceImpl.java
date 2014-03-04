@@ -59,7 +59,7 @@ public class LiveReloadEventServiceImpl implements EventHandler, LivereloadEvent
         final String propPath = (String) event.getProperty(SlingConstants.PROPERTY_PATH);
         final String propResType = (String) event.getProperty(SlingConstants.PROPERTY_RESOURCE_TYPE);
         final String propTopic = (String) event.getTopic();
-        if ("nt:file".equals(propResType)) {
+
             LiveReloadEventType eventType = null;
             if(propTopic.equals(SlingConstants.TOPIC_RESOURCE_ADDED)){
                 eventType = LiveReloadEventType.ADDED;
