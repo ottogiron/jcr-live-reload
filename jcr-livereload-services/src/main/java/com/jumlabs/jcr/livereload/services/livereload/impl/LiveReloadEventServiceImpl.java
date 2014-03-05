@@ -59,7 +59,9 @@ public class LiveReloadEventServiceImpl implements EventHandler, LivereloadEvent
         final String propPath = (String) event.getProperty(SlingConstants.PROPERTY_PATH);
         final String propResType = (String) event.getProperty(SlingConstants.PROPERTY_RESOURCE_TYPE);
         final String propTopic = (String) event.getTopic();
-
+        String[] propTypes = {"nt:file","cq:Dialog","cq:EditConfig"};
+        if (propResType != null && containsToIgnoreCase(propTypes,propResType)) {
+           // logger.info("the event type is "+propResType);
             LiveReloadEventType eventType = null;
             if(propTopic.equals(SlingConstants.TOPIC_RESOURCE_ADDED)){
                 eventType = LiveReloadEventType.ADDED;
@@ -73,6 +75,15 @@ public class LiveReloadEventServiceImpl implements EventHandler, LivereloadEvent
             notifyHandlers(eventType, event);
 
         }
+    }
+
+    private boolean  containsToIgnoreCase(String[] arr,String value){
+        for(String item:arr){
+            if(item.compareToIgnoreCase(value) == 0){
+                return true;
+            }
+        }
+        return  false;
     }
 
     private void notifyHandlers(LiveReloadEventType eventType, Event event) {
