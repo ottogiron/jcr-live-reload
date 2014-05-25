@@ -21,7 +21,6 @@ import org.glassfish.grizzly.http.HttpRequestPacket;
 import org.glassfish.grizzly.http.server.CLStaticHttpHandler;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.grizzly.http.server.NetworkListener;
-import org.glassfish.grizzly.http.server.StaticHttpHandler;
 import org.glassfish.grizzly.websockets.WebSocket;
 import org.glassfish.grizzly.websockets.WebSocketAddOn;
 import org.glassfish.grizzly.websockets.WebSocketApplication;
@@ -30,7 +29,7 @@ import org.osgi.service.component.ComponentContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Component(immediate = true,metatype = true)
+@Component(immediate = true,metatype = true,label = "JCR Live Reload Server",description = "Live reload server configuration")
 public class LiveReloadServer extends WebSocketApplication implements LiveReloadEventHandler {
 
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -100,13 +99,15 @@ public class LiveReloadServer extends WebSocketApplication implements LiveReload
 
     @Override
     public void onEvent(LiveReloadEvent event) {
-       // logger.info("An event has been  notified!!!!");
-        Set<WebSocket> sockets = getWebSockets();
-        int socketsSize = sockets.size();
-        for(WebSocket socket:sockets){
-            socket.send("Hubo 8una modificacion :), number of sockets:"+socketsSize);
+        
+        if (event.getEventType().equals(LiveReloadEventType.CHANGED)) {            
+            logger.info(".........................An event has been  notified............................");
+            Set<WebSocket> sockets = getWebSockets();
+            int socketsSize = sockets.size();
+            for (WebSocket socket : sockets) {
+                socket.send("Hubo 8una modificacion :), number of sockets:" + socketsSize);
+            }
         }
-
     }
     
     
